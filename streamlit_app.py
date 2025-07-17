@@ -27,15 +27,20 @@ if menu == "Catatan Kuliah":
             st.subheader(f"📘 Catatan untuk {st.session_state.selected_matkul} - {st.session_state.selected_Semester} {st.session_state.selected_blok}")
             st.write("Pilih Pertemuan:")
             col1, col2, col3 = st.columns(3)
-            if col1.button("Pertemuan 1"):
+           if col1.button("Pertemuan 1"):
                 st.session_state.selected_pertemuan = "Pertemuan 1"
                 st.session_state.page = "materi"
+                st.experimental_rerun()
+            
             if col2.button("Pertemuan 2"):
                 st.session_state.selected_pertemuan = "Pertemuan 2"
                 st.session_state.page = "materi"
+                st.experimental_rerun()
+            
             if col3.button("Pertemuan 3"):
                 st.session_state.selected_pertemuan = "Pertemuan 3"
                 st.session_state.page = "materi"
+                st.experimental_rerun()
 
     if st.session_state.page == "materi":
         st.header(f"📖 {st.session_state.selected_pertemuan}")

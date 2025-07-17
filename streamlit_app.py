@@ -127,11 +127,14 @@ elif menu == "Latihan Soal":
         # Tampilkan hasil
         st.markdown(f"### 🏆 Skor Akhir: *{skor}/{len(soal_data[matkul])}*")
 
-elif menu == "Catatan Kuliah":
+#catatan 
+if menu == "Catatan Kuliah":
     st.title("📒 Catatan Kuliah")
 
     if "show_notes" not in st.session_state:
         st.session_state.show_notes = False
+    if "selected_pertemuan" not in st.session_state:
+        st.session_state.selected_pertemuan = None
 
     tingkat = st.radio("Pilih Tingkat", ["Tingkat 1", "Tingkat 2"], horizontal=True)
     blok = st.selectbox("Pilih Blok", ["Blok 1", "Blok 2"])
@@ -142,11 +145,37 @@ elif menu == "Catatan Kuliah":
         st.session_state.selected_tingkat = tingkat
         st.session_state.selected_blok = blok
         st.session_state.selected_matkul = matkul
+        st.session_state.selected_pertemuan = None # Reset selected pertemuan when new notes are saved
 
     if st.session_state.show_notes:
         st.subheader(f"📘 Catatan untuk {st.session_state.selected_matkul} - {st.session_state.selected_tingkat} {st.session_state.selected_blok}")
-        st.info("Belum ada catatan yang ditambahkan.")
+        
+        # Tombol Pertemuan
+        st.markdown("---") # Garis pemisah
+        st.write("Pilih Pertemuan:")
+        cols = st.columns(3) # Membuat 3 kolom untuk tombol pertemuan
+        
+        for i in range(1, 4): # Untuk pertemuan 1, 2, 3
+            with cols[i-1]: # Menempatkan tombol di kolom yang sesuai
+                if st.button(f"Pertemuan {i}", key=f"pertemuan_btn_{i}"):
+                    st.session_state.selected_pertemuan = i
+                    st.experimental_rerun() # Memaksa rerun untuk menampilkan konten pertemuan
 
+        # Menampilkan Konten Pertemuan
+        if st.session_state.selected_pertemuan:
+            st.markdown("---")
+            st.subheader(f"Konten Pertemuan {st.session_state.selected_pertemuan}")
+            st.write(f"Ini adalah detail untuk {st.session_state.selected_matkul} - Pertemuan {st.session_state.selected_pertemuan}.")
+            # Di sini Anda bisa menambahkan konten spesifik untuk setiap pertemuan
+            # Contoh:
+            if st.session_state.selected_pertemuan == 1:
+                st.write("Materi hari ini membahas tentang pengantar Kimia Fisika.")
+            elif st.session_state.selected_pertemuan == 2:
+                st.write("Hari ini kita akan membahas termodinamika.")
+            elif st.session_state.selected_pertemuan == 3:
+                st.write("Topik hari ini adalah kinetika kimia.")
+        else:
+            st.info("Belum ada catatan yang ditambahkan atau pertemuan yang dipilih.")
 # Halaman Riwayat Jawaban
 elif menu == "Riwayat Jawaban":
     st.title("🗂 Riwayat Jawaban")

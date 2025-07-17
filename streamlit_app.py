@@ -10,6 +10,7 @@ if menu == "Catatan Kuliah":
     if "page" not in st.session_state:
         st.session_state.page = "form"
 
+    # FORM PILIH SEMESTER, BLOK, MATKUL
     if st.session_state.page == "form":
         Semester = st.radio("Pilih Semester", ["Semester 1", "Semester 2"], horizontal=True)
         blok = st.selectbox("Pilih Blok", ["Blok 1", "Blok 2"])
@@ -21,21 +22,23 @@ if menu == "Catatan Kuliah":
             st.session_state.selected_matkul = matkul
             st.session_state.page = "pertemuan"
 
-    if st.session_state.page == "pertemuan":
+    # TAMPILKAN TOMBOL PERTEMUAN
+    elif st.session_state.page == "pertemuan":
         st.subheader(f"📘 Catatan untuk {st.session_state.selected_matkul} - {st.session_state.selected_Semester} {st.session_state.selected_blok}")
         st.write("Pilih Pertemuan:")
         col1, col2, col3 = st.columns(3)
-        elif col1.button("Pertemuan 1"):
+        if col1.button("Pertemuan 1"):
             st.session_state.selected_pertemuan = "Pertemuan 1"
             st.session_state.page = "materi"
-        elif col2.button("Pertemuan 2"):
+        if col2.button("Pertemuan 2"):
             st.session_state.selected_pertemuan = "Pertemuan 2"
             st.session_state.page = "materi"
-        elif col3.button("Pertemuan 3"):
+        if col3.button("Pertemuan 3"):
             st.session_state.selected_pertemuan = "Pertemuan 3"
             st.session_state.page = "materi"
 
-    if st.session_state.page == "materi":
+    # TAMPILKAN ISI MATERI
+    elif st.session_state.page == "materi":
         st.header(f"📖 {st.session_state.selected_pertemuan}")
         st.write(f"Materi untuk {st.session_state.selected_matkul} - {st.session_state.selected_Semester} {st.session_state.selected_blok} - {st.session_state.selected_pertemuan}")
         if st.button("⬅️ Kembali"):

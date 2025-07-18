@@ -252,15 +252,12 @@ if st.session_state.selected_matkul_simple:
             # Karena Biokimia hanya punya 2 pertemuan di definisi materi_titles,
             # tidak ada 'elif st.session_state.selected_pertemuan_simple == 3' di sini
             # kecuali Anda ingin menambahkannya di materi_titles
+        else:
+            st.info("Silakan pilih materi pertemuan di atas untuk melihat detail.")
     else:
-        st.info("Silakan pilih materi pertemuan di atas untuk melihat detail.")
-else:
-    st.info("Silakan pilih mata kuliah di atas.")
+        st.info("Silakan pilih mata kuliah di atas.")
     
-# Halaman Riwayat Jawaban
-elif menu == "Riwayat Jawaban":
-    st.title("🗂 Riwayat Jawaban")
-    st.write("Di sini akan ditampilkan jawaban-jawaban soal yang pernah kamu kerjakan.")
+
 
 # Halaman Tentang
 elif menu == "Tentang":

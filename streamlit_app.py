@@ -128,12 +128,6 @@ elif menu == "Latihan Soal":
         st.markdown(f"### 🏆 Skor Akhir: *{skor}/{len(soal_data[matkul])}*")
 
 # Nama file: 📒 Catatan Kuliah.py
-# Nama file: 📒 Catatan Kuliah.py
-
-import streamlit as st
-
-# --- DEFINISI JUDUL MATERI UNTUK SETIAP MATA KULIAH DAN PERTEMUAN ---
-# Perhatikan bahwa sekarang jumlah pertemuan bisa berbeda!
 materi_titles = {
     "Kimia Fisika": {
         1: "Pengantar Termodinamika",
@@ -154,7 +148,7 @@ materi_titles = {
 }
 # --- AKHIR DEFINISI JUDUL MATERI ---
 
-
+if menu == "Catatan Kuliah"
 st.title("📒 Catatan Kuliah")
 
 # Inisialisasi session_state jika belum ada

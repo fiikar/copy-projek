@@ -128,113 +128,136 @@ elif menu == "Latihan Soal":
         st.markdown(f"### 🏆 Skor Akhir: *{skor}/{len(soal_data[matkul])}*")
 
 # Nama file: 📒 Catatan Kuliah.py
-elif menu == "Catatan Kuliah":
-    st.title("📒 Catatan Kuliah")
-    materi_titles = {
-        "Kimia Fisika": {
-            1: "Pengantar Termodinamika",
-            2: "Entropi dan Energi Bebas",
-            3: "Kinetika Reaksi"
-        },
-        "Spektrofotometri": {
-            1: "Prinsip Dasar UV-Vis",
-            2: "Aplikasi Analisis Kuantitatif",
-            3: "Spektrofotometri Serapan Atom (AAS)"
-        },
-        "Biokimia": {
-            1: "Struktur Karbohidrat & Lipid",
-            2: "Enzim dan Katalisis Biologis",
-            3: "Metabolisme Energi"
-        }
+# Nama file: 📒 Catatan Kuliah.py
+
+import streamlit as st
+
+# --- DEFINISI JUDUL MATERI UNTUK SETIAP MATA KULIAH DAN PERTEMUAN ---
+# Perhatikan bahwa sekarang jumlah pertemuan bisa berbeda!
+materi_titles = {
+    "Kimia Fisika": {
+        1: "Pengantar Termodinamika",
+        2: "Entropi dan Energi Bebas",
+        3: "Kinetika Reaksi",
+        4: "Asam Basa Lanjut" # Contoh: Kimia Fisika punya 4 pertemuan
+    },
+    "Spektrofotometri": {
+        1: "Prinsip Dasar UV-Vis",
+        2: "Aplikasi Analisis Kuantitatif",
+        3: "Spektrofotometri Serapan Atom (AAS)"
+    },
+    "Biokimia": {
+        1: "Struktur Karbohidrat & Lipid",
+        2: "Enzim dan Katalisis Biologis" # Contoh: Biokimia hanya punya 2 pertemuan
+        # Jika Anda ingin menambahkan pertemuan 3, tinggal tambahkan di sini
     }
+}
+# --- AKHIR DEFINISI JUDUL MATERI ---
+
+
+st.title("📒 Catatan Kuliah")
+
+# Inisialisasi session_state jika belum ada
+if "selected_matkul_simple" not in st.session_state:
+    st.session_state.selected_matkul_simple = None
+if "selected_pertemuan_simple" not in st.session_state:
+    st.session_state.selected_pertemuan_simple = None
+
+# Dropdown Mata Kuliah
+matkul_options = list(materi_titles.keys())
+selected_matkul = st.selectbox("Pilih Mata Kuliah", matkul_options, key="matkul_dropdown_simple")
+
+# Jika mata kuliah dipilih (saat selectbox berubah)
+if selected_matkul != st.session_state.selected_matkul_simple:
+    st.session_state.selected_matkul_simple = selected_matkul
+    st.session_state.selected_pertemuan_simple = None # Reset pertemuan jika matkul berubah
+
+# Tampilkan tombol pertemuan hanya jika mata kuliah sudah dipilih
+if st.session_state.selected_matkul_simple:
+    st.subheader(f"Catatan untuk {st.session_state.selected_matkul_simple}")
+    st.markdown("---")
+    st.write("Pilih Materi Pertemuan:")
     
-    # Inisialisasi session_state jika belum ada
-    if "selected_matkul_simple" not in st.session_state:
-        st.session_state.selected_matkul_simple = None
-    if "selected_pertemuan_simple" not in st.session_state:
-        st.session_state.selected_pertemuan_simple = None
+    # Mendapatkan judul materi untuk mata kuliah yang sedang dipilih
+    current_matkul_titles = materi_titles.get(st.session_state.selected_matkul_simple, {})
     
-    # Dropdown Mata Kuliah
-    matkul_options = list(materi_titles.keys()) # Mengambil opsi dari keys dictionary materi_titles
-    selected_matkul = st.selectbox("Pilih Mata Kuliah", matkul_options, key="matkul_dropdown_simple")
+    # Menentukan berapa banyak kolom yang dibutuhkan berdasarkan jumlah pertemuan
+    num_pertemuan = len(current_matkul_titles)
+    # Jika Anda ingin kolom maksimal 3 per baris, bisa gunakan logika ini:
+    # cols = st.columns(min(num_pertemuan, 3)) # Membatasi maks 3 kolom per baris
     
-    # Jika mata kuliah dipilih (saat selectbox berubah)
-    if selected_matkul != st.session_state.selected_matkul_simple:
-        st.session_state.selected_matkul_simple = selected_matkul
-        st.session_state.selected_pertemuan_simple = None # Reset pertemuan jika matkul berubah
+    # Menggunakan jumlah kolom yang sama dengan jumlah pertemuan untuk tata letak yang fleksibel
+    # atau jika num_pertemuan sangat besar, Anda mungkin ingin memecahnya ke beberapa baris
+    cols = st.columns(num_pertemuan if num_pertemuan > 0 else 1) # Buat kolom sebanyak jumlah pertemuan
+
+    # Loop melalui nomor pertemuan yang ada untuk mata kuliah ini
+    # Mengurutkan kunci agar tombol selalu tampil berurutan (1, 2, 3, ...)
+    sorted_pertemuan_nums = sorted(current_matkul_titles.keys()) 
     
-    # Tampilkan tombol pertemuan hanya jika mata kuliah sudah dipilih
-    if st.session_state.selected_matkul_simple:
-        st.subheader(f"Catatan untuk {st.session_state.selected_matkul_simple}")
+    for idx, pertemuan_num in enumerate(sorted_pertemuan_nums):
+        with cols[idx]: # Menggunakan indeks untuk menempatkan tombol di kolom yang berbeda
+            button_label = current_matkul_titles.get(pertemuan_num, f"Pertemuan {pertemuan_num}")
+            
+            def set_pertemuan_simple_callback(p_num): # Ganti nama fungsi callback agar tidak bentrok
+                st.session_state.selected_pertemuan_simple = p_num
+            
+            st.button(button_label, key=f"materi_btn_simple_{pertemuan_num}", on_click=set_pertemuan_simple_callback, args=(pertemuan_num,))
+
+    # Menampilkan Konten Pertemuan
+    if st.session_state.selected_pertemuan_simple:
         st.markdown("---")
-        st.write("Pilih Materi Pertemuan:")
+        konten_subheader_title = current_matkul_titles.get(st.session_state.selected_pertemuan_simple, f"Konten Pertemuan {st.session_state.selected_pertemuan_simple}")
+        st.subheader(f"Konten: {konten_subheader_title}")
+        st.write(f"Ini adalah detail untuk **{st.session_state.selected_matkul_simple}** - **{konten_subheader_title}**.")
         
-        cols = st.columns(3) # Membuat 3 kolom untuk tombol pertemuan
+        # --- BAGIAN KONTEN DAN GAMBAR ---
+        # Pastikan angka pertemuan di sini sesuai dengan yang ada di materi_titles
+        if st.session_state.selected_matkul_simple == "Kimia Fisika":
+            if st.session_state.selected_pertemuan_simple == 1:
+                st.write("Materi Kimia Fisika Pertemuan 1: Gas.")
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_1.jpg", width=500)
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_2.jpg", width=500)
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_3.jpg", width=500)
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_4.jpg", width=500)
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_5.jpg", width=500)
+                st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_6.jpg", width=500)
+            elif st.session_state.selected_pertemuan_simple == 2:
+                st.write("Materi Kimia Fisika Pertemuan 2: Entropi dan Energi Bebas.")
+                st.image("URL_GAMBAR_KIMIA_FISIKA_P2_ANDA", caption="Diagram Entropi", width=500)
+            elif st.session_state.selected_pertemuan_simple == 3:
+                st.write("Materi Kimia Fisika Pertemuan 3: Kinetika Reaksi.")
+                st.image("URL_GAMBAR_KIMIA_FISIKA_P3_ANDA", caption="Grafik Laju Reaksi", width=500)
+            elif st.session_state.selected_pertemuan_simple == 4: # Tambahkan blok untuk pertemuan 4
+                st.write("Materi Kimia Fisika Pertemuan 4: Asam Basa Lanjut.")
+                st.image("URL_GAMBAR_KIMIA_FISIKA_P4_ANDA", caption="Titik Ekuivalen", width=500)
         
-        # Mendapatkan judul materi untuk mata kuliah yang sedang dipilih
-        current_matkul_titles = materi_titles.get(st.session_state.selected_matkul_simple, {})
+        elif st.session_state.selected_matkul_simple == "Spektrofotometri":
+            if st.session_state.selected_pertemuan_simple == 1:
+                st.write("Materi Spektrofotometri Pertemuan 1: Prinsip Dasar UV-Vis.")
+                st.image("URL_GAMBAR_SPEKTRO_P1_ANDA", caption="Skema Spektrofotometer", width=500)
+            elif st.session_state.selected_pertemuan_simple == 2:
+                st.write("Materi Spektrofotometri Pertemuan 2: Aplikasi dalam Analisis Kuantitatif.")
+                st.image("URL_GAMBAR_SPEKTRO_P2_ANDA", caption="Kurva Kalibrasi", width=500)
+            elif st.session_state.selected_pertemuan_simple == 3:
+                st.write("Materi Spektrofotometri Pertemuan 3: Spektrofotometri Serapan Atom (AAS).")
+                st.image("URL_GAMBAR_SPEKTRO_P3_ANDA", caption="Prinsip AAS", width=500)
         
-        for i in range(1, 4): # Untuk pertemuan 1, 2, 3
-            with cols[i-1]:
-                # Mendapatkan judul spesifik untuk tombol
-                button_label = current_matkul_titles.get(i, f"Pertemuan {i}") # Fallback jika judul tidak ditemukan
-                
-                def set_pertemuan_simple(pertemuan_num):
-                    st.session_state.selected_pertemuan_simple = pertemuan_num
-                
-                st.button(button_label, key=f"materi_btn_simple_{i}", on_click=set_pertemuan_simple, args=(i,))
-    
-        # Menampilkan Konten Pertemuan
-        if st.session_state.selected_pertemuan_simple:
-            st.markdown("---")
-            # Menggunakan judul materi spesifik di subheader konten
-            konten_subheader_title = current_matkul_titles.get(st.session_state.selected_pertemuan_simple, f"Konten Pertemuan {st.session_state.selected_pertemuan_simple}")
-            st.subheader(f"Konten: {konten_subheader_title}")
-            st.write(f"Ini adalah detail untuk **{st.session_state.selected_matkul_simple}** - **{konten_subheader_title}**.")
-            
-            # --- BAGIAN KONTEN DAN GAMBAR ---
-            if st.session_state.selected_matkul_simple == "Kimia Fisika":
-                if st.session_state.selected_pertemuan_simple == 1:
-                    st.write("Materi Kimia Fisika Pertemuan 1: Gas.")
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_1.jpg", width=500)
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_2.jpg", width=500)
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_3.jpg", width=500)
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_4.jpg", width=500)
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_5.jpg", width=500)
-                    st.image("https://raw.githubusercontent.com/fiikar/copy-projek/main/Notes_250708_103057_6.jpg", width=500)
-                    
-                elif st.session_state.selected_pertemuan_simple == 2:
-                    st.write("Materi Kimia Fisika Pertemuan 2: Entropi dan Energi Bebas.")
-                    st.image("URL_GAMBAR_KIMIA_FISIKA_P2_ANDA", caption="Diagram Entropi", width=500)
-                elif st.session_state.selected_pertemuan_simple == 3:
-                    st.write("Materi Kimia Fisika Pertemuan 3: Kinetika Reaksi.")
-                    st.image("URL_GAMBAR_KIMIA_FISIKA_P3_ANDA", caption="Grafik Laju Reaksi", width=500)
-            
-            elif st.session_state.selected_matkul_simple == "Spektrofotometri":
-                if st.session_state.selected_pertemuan_simple == 1:
-                    st.write("Materi Spektrofotometri Pertemuan 1: Prinsip Dasar UV-Vis.")
-                    st.image("URL_GAMBAR_SPEKTRO_P1_ANDA", caption="Skema Spektrofotometer", width=500)
-                elif st.session_state.selected_pertemuan_simple == 2:
-                    st.write("Materi Spektrofotometri Pertemuan 2: Aplikasi dalam Analisis Kuantitatif.")
-                    st.image("URL_GAMBAR_SPEKTRO_P2_ANDA", caption="Kurva Kalibrasi", width=500)
-                elif st.session_state.selected_pertemuan_simple == 3:
-                    st.write("Materi Spektrofotometri Pertemuan 3: Spektrofotometri Serapan Atom (AAS).")
-                    st.image("URL_GAMBAR_SPEKTRO_P3_ANDA", caption="Prinsip AAS", width=500)
-            
-            elif st.session_state.selected_matkul_simple == "Biokimia":
-                if st.session_state.selected_pertemuan_simple == 1:
-                    st.write("Materi Biokimia Pertemuan 1: Struktur Karbohidrat dan Lipid.")
-                    st.image("URL_GAMBAR_BIOKIMIA_P1_ANDA", caption="Struktur Glukosa", width=500)
-                elif st.session_state.selected_pertemuan_simple == 2:
-                    st.write("Materi Biokimia Pertemuan 2: Enzim dan Katalisis Biologis.")
-                    st.image("URL_GAMBAR_BIOKIMIA_P2_ANDA", caption="Mekanisme Enzim", width=500)
-                elif st.session_state.selected_pertemuan_simple == 3:
-                    st.write("Materi Biokimia Pertemuan 3: Metabolisme Energi.")
-                    st.image("URL_GAMBAR_BIOKIMIA_P3_ANDA", caption="Siklus Krebs", width=500)
-        else:
-            st.info("Silakan pilih materi pertemuan di atas untuk melihat detail.")
+        elif st.session_state.selected_matkul_simple == "Biokimia":
+            if st.session_state.selected_pertemuan_simple == 1:
+                st.write("Materi Biokimia Pertemuan 1: Struktur Karbohidrat dan Lipid.")
+                st.image("URL_GAMBAR_BIOKIMIA_P1_ANDA", caption="Struktur Glukosa", width=500)
+            elif st.session_state.selected_pertemuan_simple == 2:
+                st.write("Materi Biokimia Pertemuan 2: Enzim dan Katalisis Biologis.")
+                st.image("URL_GAMBAR_BIOKIMIA_P2_ANDA", caption="Mekanisme Enzim", width=500)
+            # Karena Biokimia hanya punya 2 pertemuan di definisi materi_titles,
+            # tidak ada 'elif st.session_state.selected_pertemuan_simple == 3' di sini
+            # kecuali Anda ingin menambahkannya di materi_titles
     else:
-        st.info("Silakan pilih mata kuliah di atas.")# Halaman Riwayat Jawaban
+        st.info("Silakan pilih materi pertemuan di atas untuk melihat detail.")
+else:
+    st.info("Silakan pilih mata kuliah di atas.")
+    
+# Halaman Riwayat Jawaban
 elif menu == "Riwayat Jawaban":
     st.title("🗂 Riwayat Jawaban")
     st.write("Di sini akan ditampilkan jawaban-jawaban soal yang pernah kamu kerjakan.")

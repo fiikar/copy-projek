@@ -131,6 +131,11 @@ elif menu == "Latihan Soal":
 if menu == "Catatan Kuliah":
     st.title("📒 Catatan Kuliah")
 
+# Jika mata kuliah dipilih (saat selectbox berubah)
+if selected_matkul != st.session_state.selected_matkul_simple:
+    st.session_state.selected_matkul_simple = selected_matkul
+    st.session_state.selected_pertemuan_simple = None # Reset pertemuan jika matkul berubah
+
   if st.session_state.selected_matkul_simple:
     st.subheader(f"Catatan untuk {st.session_state.selected_matkul_simple}")
     st.markdown("---")

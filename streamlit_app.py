@@ -148,7 +148,7 @@ materi_titles = {
 }
 # --- AKHIR DEFINISI JUDUL MATERI ---
 
-if menu == "Catatan Kuliah"
+if menu == "Catatan Kuliah":
 st.title("📒 Catatan Kuliah")
 
 # Inisialisasi session_state jika belum ada

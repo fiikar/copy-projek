@@ -275,39 +275,35 @@ if menu == "Catatan Kuliah 📒":
 # Halaman Tentang
 elif menu == "Tentang ℹ️":
     st.title("ℹ️Tentang MindTrack")
-    st.write("MindTrack adalah aplikasi pembelajaran interaktif yang dirancang untuk membantu mahasiswa dan pelajar dalam memahami konsep-konsep penting di bidang kimia, fisika, dan biokimia.")
+    st.write("MindTrack adalah sebuah web yang dirancang untuk membantu mahasiswa khusunya di lingkungan Politeiknik AKA Bogor dalam memahami konsep-konsep penting di mata kuliah teori.")
     
     st.header("Tujuan Aplikasi")
     st.write("""
         Aplikasi ini bertujuan untuk:
-        - Menyediakan latihan soal yang bervariasi untuk meningkatkan pemahaman materi.
+        - Menyediakan latihan soal yang bervariasi untuk meningkatkan pemahaman.
         - Menyediakan catatan kuliah yang mudah diakses untuk membantu dalam belajar.
-        - Mencatat riwayat jawaban untuk membantu pengguna dalam belajar.
-    """)
+        - Membantu mempersiapkan diri untuk menghadapi UTS maupun UAS 
+        """)
     
     st.header("Fitur Utama")
     st.write("""
         - **Latihan Soal**: Pengguna dapat memilih mata kuliah dan menjawab soal-soal yang telah disediakan.
         - **Catatan Kuliah**: Pengguna dapat mengakses catatan kuliah yang relevan dengan mata kuliah yang dipilih.
-        - **Riwayat Jawaban**: Pengguna dapat melihat jawaban yang telah mereka berikan sebelumnya.
     """)
     
     st.header("Tim Pengembang")
     st.write("""
         Aplikasi ini dikembangkan oleh:
-        - **Zulfikar Syahid**
-        - **Rizmi Maitri Nurgianti**
-        - **Nafisah Nailalhusna I.**
-        - **Jane Lazarina Bora Isu**
+        - **Zulfikar Syahid.**
+        - **Rizmi Maitri Nurgianti.**
+        - **Nafisah Nailalhusna Isbandi.**
+        - **Jane Lazarina Bora Isu.**
     """)
     
     st.header("Kontak")
     st.write("""
         Jika Anda memiliki pertanyaan atau masukan, silakan hubungi kami di:
-        - Email: mindtrack@example.com
-        - Instagram: [@mindtrack_app](https://instagram.com/mindtrack_app)
+        - Email: zulfikarsyahid20@gmail.com
     """)
     
     st.write("Terima kasih telah menggunakan MindTrack! Selamat belajar! 🎉")
-
-

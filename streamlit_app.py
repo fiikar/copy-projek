@@ -371,21 +371,23 @@ elif menu == "Responsi IPC":
                         if st.session_state.selected_pertemuan_responsi == 1:
                             st.image("")
                         elif st.session_state.selected_pertemuan_responsi == 2:
+                            st.write("coming soon")
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-    
+                            st.write("coming soon")
                 elif st.session_state.selected_prodi_responsi == "PLI":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            
+                            st.write("coming soon")
                         elif st.session_state.selected_pertemuan_responsi == 2:
-                            
+                            st.write("coming soon")
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-
+                            st.write("coming soon")
                 elif st.session_state.selected_prodi_responsi == "PMIP":
                     if st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
+                            st.write("coming soon")
                 else:
                     st.info("Konten untuk prodi/mata kuliah/pertemuan ini belum tersedia.")
             else:

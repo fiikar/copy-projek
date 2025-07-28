@@ -122,25 +122,9 @@ materi_titles = {
     }
 }
 
-# Nama file: 📝 Responsi IPC.py
-
-import streamlit as st
-
-# --- DEFINISI JUDUL MATERI UNTUK SETIAP PRODI, MATA KULIAH, DAN PERTEMUAN ---
-# Ini adalah struktur data baru yang lebih kompleks untuk Responsi IPC
+# Responsi IPC
 responsi_ipc_content = {
-    "PMIP": {
-        "Fisika Dasar": {
-            1: "Vektor dan Kinematika",
-            2: "Dinamika Partikel",
-            3: "Usaha dan Energi"
-        },
-        "Matematika Dasar": {
-            1: "Turunan Fungsi",
-            2: "Integral Tentu"
-        }
-    },
-    "ANKIM": {
+    "ANKIM": { 
         "Kimia Analitik": {
             1: "Gravimetri",
             2: "Titrimetri Asam Basa"
@@ -150,7 +134,7 @@ responsi_ipc_content = {
             2: "Kromatografi Gas"
         }
     },
-    "PLI": {
+    "PLI": { 
         "Dasar Pemrograman": {
             1: "Pengantar Python",
             2: "Struktur Data List"
@@ -159,9 +143,19 @@ responsi_ipc_content = {
             1: "Distribusi Probabilitas",
             2: "Uji Hipotesis"
         }
+    },
+    "PMIP": { 
+        "Fisika Dasar": {
+            1: "Vektor dan Kinematika",
+            2: "Dinamika Partikel",
+            3: "Usaha dan Energi"
+        },
+        "Matematika Dasar": {
+            1: "Turunan Fungsi",
+            2: "Integral Tentu"
+        }
     }
 }
-
 # Halaman Beranda
 if menu == "Beranda 🏠":
     st.title("🧠 MindTrack")

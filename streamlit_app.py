@@ -125,34 +125,27 @@ materi_titles = {
 # Responsi IPC
 responsi_ipc_content = {
     "ANKIM": { 
-        "Kimia Analitik": {
-            1: "Gravimetri",
-            2: "Titrimetri Asam Basa"
+        "UTS BLOK 2 SEMESTER 2": {
+            1: "Kimia Polimer Tingkat 2",
+            2: "Kimia Fisika Tingkat 1",
+            3: "Spektrofotometri Tingkat 1"
         },
-        "Kromatografi": {
-            1: "Dasar-dasar Kromatografi",
-            2: "Kromatografi Gas"
+        "UAS BLOK 2 SEMESTER 2": {
+            1: "Cominng Soon"
         }
     },
     "PLI": { 
-        "Dasar Pemrograman": {
-            1: "Pengantar Python",
-            2: "Struktur Data List"
+        "UTS Blok 2 Senester 2": {
+            1: "Pengendalian Pencemaran Udara",
+            2: "Pengolahan Air dan Air Limbah"
         },
-        "Statistika Terapan": {
-            1: "Distribusi Probabilitas",
-            2: "Uji Hipotesis"
+        "UAS Blok 2 Semesteer 2": {
+            1: "Coming Soon"
         }
     },
     "PMIP": { 
-        "Fisika Dasar": {
-            1: "Vektor dan Kinematika",
-            2: "Dinamika Partikel",
-            3: "Usaha dan Energi"
-        },
-        "Matematika Dasar": {
-            1: "Turunan Fungsi",
-            2: "Integral Tentu"
+        "UAS BLOK 2 SEMESTER 2": {
+            1: "Comong Soon"
         }
     }
 }
@@ -372,68 +365,27 @@ elif menu == "Responsi IPC":
                 st.subheader(f"Konten Responsi: {konten_subheader_title}")
                 st.write(f"Ini adalah detail responsi untuk **{st.session_state.selected_prodi_responsi}** - **{st.session_state.selected_matkul_responsi}** - **{konten_subheader_title}**.")
                 
-                # --- BAGIAN KONTEN DAN GAMBAR RESPONSI ---
-                # Tambahkan logika untuk menampilkan konten spesifik di sini
-                # Ini akan menjadi banyak blok if/elif/else tergantung pada jumlah prodi, matkul, dan pertemuan
-                
-                # Contoh struktur (Anda perlu mengisi kontennya dengan teks dan st.image() Anda)
-                if st.session_state.selected_prodi_responsi == "PMIP":
-                    if st.session_state.selected_matkul_responsi == "Fisika Dasar":
+                #Konten Responsi IPC
+                if st.session_state.selected_prodi_responsi == "ANKIM":
+                    if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Fisika Dasar Pertemuan 1: **Vektor dan Kinematika**.")
-                            # st.image("URL_GAMBAR_PMIP_FISIKA_P1_ANDA", caption="Contoh Vektor")
-                            st.video("https://drive.google.com/file/d/1T-dGbWVWi4Tv8a875U1f5Y9lk14R8XDm/view?usp=drive_link")
-                            st.video("https://drive.google.com/uc?export=download&id=1T-dGbWVWi4Tv8a875U1f5Y9lk14R8XDm")
-                            st.write("Isi materi Responsi Fisika Dasar untuk PMIP pertemuan 1.")
+                            st.image("")
                         elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Fisika Dasar Pertemuan 2: **Dinamika Partikel**.")
-                            # st.image("URL_GAMBAR_PMIP_FISIKA_P2_ANDA", caption="Diagram Gaya")
-                            st.write("Isi materi Responsi Fisika Dasar untuk PMIP pertemuan 2.")
-                        elif st.session_state.selected_pertemuan_responsi == 3:
-                            st.write("Materi Responsi Fisika Dasar Pertemuan 3: **Usaha dan Energi**.")
-                            # st.image("URL_GAMBAR_PMIP_FISIKA_P3_ANDA", caption="Energi Mekanik")
-                            st.write("Isi materi Responsi Fisika Dasar untuk PMIP pertemuan 3.")
-                    elif st.session_state.selected_matkul_responsi == "Matematika Dasar":
+                    elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Matematika Dasar Pertemuan 1: **Turunan Fungsi**.")
-                            st.write("Isi materi Responsi Matematika Dasar untuk PMIP pertemuan 1.")
-                        elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Matematika Dasar Pertemuan 2: **Integral Tentu**.")
-                            st.write("Isi materi Responsi Matematika Dasar untuk PMIP pertemuan 2.")
-                
-                elif st.session_state.selected_prodi_responsi == "ANKIM":
-                    if st.session_state.selected_matkul_responsi == "Kimia Analitik":
-                        if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Kimia Analitik Pertemuan 1: **Gravimetri**.")
-                            st.write("Isi materi Responsi Kimia Analitik untuk ANKIM pertemuan 1.")
-                        elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Kimia Analitik Pertemuan 2: **Titrimetri Asam Basa**.")
-                            st.write("Isi materi Responsi Kimia Analitik untuk ANKIM pertemuan 2.")
-                    elif st.session_state.selected_matkul_responsi == "Kromatografi":
-                        if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Kromatografi Pertemuan 1: **Dasar-dasar Kromatografi**.")
-                            st.write("Isi materi Responsi Kromatografi untuk ANKIM pertemuan 1.")
-                        elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Kromatografi Pertemuan 2: **Kromatografi Gas**.")
-                            st.write("Isi materi Responsi Kromatografi untuk ANKIM pertemuan 2.")
     
                 elif st.session_state.selected_prodi_responsi == "PLI":
-                    if st.session_state.selected_matkul_responsi == "Dasar Pemrograman":
+                    if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Dasar Pemrograman Pertemuan 1: **Pengantar Python**.")
-                            st.write("Isi materi Responsi Dasar Pemrograman untuk PLI pertemuan 1.")
+                            
                         elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Dasar Pemrograman Pertemuan 2: **Struktur Data List**.")
-                            st.write("Isi materi Responsi Dasar Pemrograman untuk PLI pertemuan 2.")
-                    elif st.session_state.selected_matkul_responsi == "Statistika Terapan":
+                            
+                    elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("Materi Responsi Statistika Terapan Pertemuan 1: **Distribusi Probabilitas**.")
-                            st.write("Isi materi Responsi Statistika Terapan untuk PLI pertemuan 1.")
-                        elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("Materi Responsi Statistika Terapan Pertemuan 2: **Uji Hipotesis**.")
-                            st.write("Isi materi Responsi Statistika Terapan untuk PLI pertemuan 2.")
-                
-                # Anda dapat menambahkan lebih banyak else/if untuk prodi, mata kuliah, dan pertemuan lainnya
+
+                elif st.session_state.selected_prodi_responsi == "PMIP":
+                    if st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
+                        if st.session_state.selected_pertemuan_responsi == 1:
                 else:
                     st.info("Konten untuk prodi/mata kuliah/pertemuan ini belum tersedia.")
             else:

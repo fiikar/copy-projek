@@ -372,14 +372,14 @@ elif menu == "Responsi IPC":
                             import streamlit.components.v1 as components
                             
                             # ID video Google Drive kamu
-                            drive_id = "1Zm_xnQIu6GqTvnJUBYg8VB1lkwpRWNES"
+                            drive_id = "1L3xh09fkW0hmPgMgq89frHSPGvcA10Ra"
                             
-                            # Embed HTML video dari Google Drive
+                            # HTML embed untuk Google Drive video
                             embed_code = f'''
                             <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
                             '''
                             
-                            # Tampilkan di Streamlit
+                            # Tampilkan video di aplikasi Streamlit
                             components.html(embed_code, height=500)
 
                         elif st.session_state.selected_pertemuan_responsi == 2:

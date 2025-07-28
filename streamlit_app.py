@@ -370,6 +370,7 @@ elif menu == "Responsi IPC":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
                             st.image("")
+                            st.video("https://drive.usercontent.google.com/download?id=13tNnytoo7KNzbNQ-L6LkMhR1uPXxk_nn&export=download&authuser=0")
                         elif st.session_state.selected_pertemuan_responsi == 2:
                             st.write("coming soon")
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":

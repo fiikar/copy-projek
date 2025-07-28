@@ -389,6 +389,7 @@ elif menu == "Responsi IPC":
                             st.write("Materi Responsi Fisika Dasar Pertemuan 1: **Vektor dan Kinematika**.")
                             # st.image("URL_GAMBAR_PMIP_FISIKA_P1_ANDA", caption="Contoh Vektor")
                             st.video("https://drive.google.com/file/d/1T-dGbWVWi4Tv8a875U1f5Y9lk14R8XDm/view?usp=drive_link")
+                            st.video("https://youtu.be/_B9Mv18q_vU?si=_brxeH--NKBMNvzX")
                             st.write("Isi materi Responsi Fisika Dasar untuk PMIP pertemuan 1.")
                         elif st.session_state.selected_pertemuan_responsi == 2:
                             st.write("Materi Responsi Fisika Dasar Pertemuan 2: **Dinamika Partikel**.")

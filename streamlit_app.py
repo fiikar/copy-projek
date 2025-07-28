@@ -315,7 +315,7 @@ elif menu == "Catatan Kuliah 📒":
 
 # Halman Responsi IPC
 elif menu == "Responsi IPC":
-st.title("📝 Responsi IPC")
+    st.title("📝 Responsi IPC")
     
     # Inisialisasi session_state jika belum ada
     if "selected_prodi_responsi" not in st.session_state:

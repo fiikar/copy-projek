@@ -384,22 +384,38 @@ elif menu == "Responsi IPC":
                                     components.html(embed_code, height=500)
 
                         elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("coming soon")
-                    elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
-                        if st.session_state.selected_pertemuan_responsi == 1:
-                              # Tampilkan video di aplikasi Streamlit
+                            # Tampilkan video di aplikasi Streamlit
+                            drive_id = "1AmOhnxyfGciJsw76j2ubdb9JFGgJxy2P"
+                            embed_code = f'''
+                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                            '''
+                            components.html(embed_code, height=500)
+                        elif st.session_state.selected_pertemuan_responsi == 3:
+                             # Tampilkan video di aplikasi Streamlit
                             drive_id = "1L3xh09fkW0hmPgMgq89frHSPGvcA10Ra"
                             embed_code = f'''
                             <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
                             '''
                             components.html(embed_code, height=500)
-
+                    elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
+                        if st.session_state.selected_pertemuan_responsi == 1:
+                            st.write("coming soon")
                 elif st.session_state.selected_prodi_responsi == "PLI":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("coming soon")
+                            # Tampilkan video di aplikasi Streamlit
+                            drive_id = "1T-dGbWVWi4Tv8a875U1f5Y9lk14R8XDm"
+                            embed_code = f'''
+                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                            '''
+                            components.html(embed_code, height=500)
                         elif st.session_state.selected_pertemuan_responsi == 2:
-                            st.write("coming soon")
+                            # Tampilkan video di aplikasi Streamlit
+                            drive_id = "13tNnytoo7KNzbNQ-L6LkMhR1uPXxk_nn"
+                            embed_code = f'''
+                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                            '''
+                            components.html(embed_code, height=500)
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
                             st.write("coming soon")

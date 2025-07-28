@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Konfigurasi halaman Streamlit
 st.set_page_config(page_title="MindTrack", page_icon="🧠")
@@ -369,24 +370,36 @@ elif menu == "Responsi IPC":
                 if st.session_state.selected_prodi_responsi == "ANKIM":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            import streamlit.components.v1 as components
-                            
-                            # ID video Google Drive kamu
-                            drive_id = "1L3xh09fkW0hmPgMgq89frHSPGvcA10Ra"
-                            
-                            # HTML embed untuk Google Drive video
-                            embed_code = f'''
-                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
-                            '''
-                            
                             # Tampilkan video di aplikasi Streamlit
-                            components.html(embed_code, height=500)
+                            # Video Part 1
+                            st.subheader("Video Part 1")
+                            components.html(
+                                '''
+                                <iframe src="https://drive.google.com/file/d/1pg7TRHY-Q-BXBE4so7sC1MGISDsqva-Y/preview" width="800" height="480" allow="autoplay"></iframe>
+                                ''',
+                                height=500
+                            )
+                            
+                            # Video Part 2
+                            st.subheader("Video Part 2")
+                            components.html(
+                                '''
+                                <iframe src="https://drive.google.com/file/d/1upl1tdaTf7vvnrwo2TR7C65xT6t2b_k0/preview" width="800" height="480" allow="autoplay"></iframe>
+                                ''',
+                                height=500
+                            )
 
                         elif st.session_state.selected_pertemuan_responsi == 2:
                             st.write("coming soon")
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.write("coming soon")
+                              # Tampilkan video di aplikasi Streamlit
+                            drive_id = "1L3xh09fkW0hmPgMgq89frHSPGvcA10Ra"
+                            embed_code = f'''
+                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                            '''
+                            components.html(embed_code, height=500)
+
                 elif st.session_state.selected_prodi_responsi == "PLI":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:

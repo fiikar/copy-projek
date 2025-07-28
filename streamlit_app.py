@@ -85,7 +85,7 @@ soal_data = {
         {"question": "Apa yang dimaksud dengan metabolisme aerob?", "options": ["Proses metabolisme dengan oksigen", "Proses metabolisme tanpa oksigen", "Proses metabolisme dengan suhu tinggi"], "answer": "Proses metabolisme dengan oksigen"},
         {"question": "Apa itu enzim amilase?", "options": ["Enzim yang menguraikan karbohidrat", "Enzim yang menguraikan protein", "Enzim yang menguraikan lemak"], "answer": "Enzim yang menguraikan karbohidrat"},
     ],
-    "Fisika ⚛️": [
+    "Fisika ⚛": [
         {"question": "Perpindahan, kecepatan, percepatan, dan gaya termasuk besaran?", "options": ["Skalar", "Vektor", "Turunan","Satuan","Utama"], "answer": "Vektor"},
         {"question": "Daya adalah ?", "options": ["Joule/sekon", "Joule.sekon", "Newton/sekon","Newton.sekon","Joule"], "answer": "Joule/sekon"},
         {"question": "Dua lembah dan dua bukit gelombang sama dengan?", "options": ["1/2 lambda", "1 lambda", "1,5 lambda","2 lambda","2,5 lambda"], "answer": "2 lambda"}, 
@@ -104,6 +104,25 @@ soal_data = {
     ]
 }
 
+#Data Judul Catatan
+materi_titles = {
+    "Kimia Fisika 🔬": {
+        1: "Gas Ideal dan Gas Nyata",
+        2: "Hukum Thermodinamika"
+    },
+    "Spektrofotometri 🧪": {
+        1: "Spektrofotometri Infrared",
+        2: "Flame Photometry",
+        3: "ICP AES"
+    },
+    "Biokimia 🧬": {
+        1: "Karbohidrat",
+        2: "Protein",
+        3: "Enzim"
+    }
+}
+
+
 # Halaman Beranda
 if menu == "Beranda 🏠":
     st.title("🧠 MindTrack")
@@ -115,7 +134,7 @@ elif menu == "Latihan Soal ✏️":
     st.title("✏️ Latihan Soal")
 
     # Pilih Mata Kuliah
-    matkul = st.selectbox("Pilih Mata Kuliah", ["Spektrofotometri 🧪", "Kimia Fisika 🔬", "Biokimia 🧬", "Fisika ⚛️"])
+    matkul = st.selectbox("Pilih Mata Kuliah", ["Spektrofotometri 🧪", "Kimia Fisika 🔬", "Biokimia 🧬", "Fisika ⚛"])
 
     # Tampilkan Soal Berdasarkan Mata Kuliah
     st.subheader(f"Soal {matkul}")
@@ -134,33 +153,16 @@ elif menu == "Latihan Soal ✏️":
                 skor += 1
             else:
                 # Tampilkan jawaban yang benar jika salah
-                st.error(f"Jawaban kamu untuk soal {index + 1} salah. Jawaban yang benar adalah: *{soal['answer']}*")
+                st.error(f"Jawaban kamu untuk soal {index + 1} salah. Jawaban yang benar adalah: {soal['answer']}")
 
         # Tampilkan hasil
         st.markdown(f"### 🏆 Skor Akhir: {skor}/{len(soal_data[matkul])}")
 
 # Catatan Kuliah
-materi_titles = {
-    "Kimia Fisika 🔬": {
-        1: "Gas Ideal dan Gas Nyata",
-        2: "Hukum Thermodinamika"
-    },
-    "Spektrofotometri 🧪": {
-        1: "Spektrofotometri Infrared",
-        2: "Flame Photometry",
-        3: "ICP AES"
-    },
-    "Biokimia 🧬": {
-        1: "Karbohidrat",
-        2: "Protein",
-        3: "Enzim"
-    }
-}
-
-if menu == "Catatan Kuliah 📒":
+elif menu == "Catatan Kuliah 📒":
     st.title("📒 Catatan Kuliah")
     
-    # Inisialisasi session_state jika belum ada
+    # Inisialisasi mini memori
     if "selected_matkul_simple" not in st.session_state:
         st.session_state.selected_matkul_simple = None
     if "selected_pertemuan_simple" not in st.session_state:
@@ -170,34 +172,34 @@ if menu == "Catatan Kuliah 📒":
     matkul_options = list(materi_titles.keys())
     selected_matkul = st.selectbox("Pilih Mata Kuliah", matkul_options, key="matkul_dropdown_simple")
     
-    # Jika mata kuliah dipilih (saat selectbox berubah)
+    # Jika mata kuliah dipilih 
     if selected_matkul != st.session_state.selected_matkul_simple:
         st.session_state.selected_matkul_simple = selected_matkul
-        st.session_state.selected_pertemuan_simple = None # Reset pertemuan jika matkul berubah
+        st.session_state.selected_pertemuan_simple = None 
     
-    # Tampilkan tombol pertemuan hanya jika mata kuliah sudah dipilih
+    # Tombol pertemuan
     if st.session_state.selected_matkul_simple:
         st.subheader(f"Catatan untuk {st.session_state.selected_matkul_simple}")
         st.markdown("---")
         st.write("Pilih Materi Pertemuan:")
         
-        # Mendapatkan judul materi untuk mata kuliah yang sedang dipilih
+        # Menganbil Data Materi
         current_matkul_titles = materi_titles.get(st.session_state.selected_matkul_simple, {})
         
-        # Menentukan berapa banyak kolom yang dibutuhkan berdasarkan jumlah pertemuan
+        # Tombol yang dibutuhkan
         num_pertemuan = len(current_matkul_titles)
-        cols = st.columns(num_pertemuan if num_pertemuan > 0 else 1) # Buat kolom sebanyak jumlah pertemuan
+        cols = st.columns(num_pertemuan if num_pertemuan > 0 else 1) #agar tombol horizontal, dibuat kolom
     
         # Loop melalui nomor pertemuan yang ada untuk mata kuliah ini
         sorted_pertemuan_nums = sorted(current_matkul_titles.keys()) 
         
         for idx, pertemuan_num in enumerate(sorted_pertemuan_nums):
-            with cols[idx]: # Menggunakan indeks untuk menempatkan tombol di kolom yang berbeda
+            with cols[idx]: 
                 button_label = current_matkul_titles.get(pertemuan_num, f"Pertemuan {pertemuan_num}")
                 
-                def set_pertemuan_simple_callback(p_num): # Ganti nama fungsi callback agar tidak bentrok
+                def set_pertemuan_simple_callback(p_num):
                     st.session_state.selected_pertemuan_simple = p_num
-                
+                #tombol pertemuan
                 st.button(button_label, key=f"materi_btn_simple_{pertemuan_num}", on_click=set_pertemuan_simple_callback, args=(pertemuan_num,))
     
         # Menampilkan Konten Pertemuan
@@ -207,7 +209,7 @@ if menu == "Catatan Kuliah 📒":
             st.subheader(f"Konten: {konten_subheader_title}")
             st.write(f"Ini adalah detail untuk {st.session_state.selected_matkul_simple} - {konten_subheader_title}.")
             
-            # --- BAGIAN KONTEN DAN GAMBAR ---
+            # konten dan gambar
             if st.session_state.selected_matkul_simple == "Kimia Fisika 🔬":
                 if st.session_state.selected_pertemuan_simple == 1:
                     st.write("Gas Ideal dan Gas Nyata")
@@ -287,17 +289,21 @@ elif menu == "Tentang ℹ️":
     
     st.header("Fitur Utama")
     st.write("""
-        - **Latihan Soal**: Pengguna dapat memilih mata kuliah dan menjawab soal-soal yang telah disediakan.
-        - **Catatan Kuliah**: Pengguna dapat mengakses catatan kuliah yang relevan dengan mata kuliah yang dipilih.
+        - *Latihan Soal*: Pengguna dapat memilih mata kuliah dan menjawab soal-soal yang telah disediakan.
+        - *Catatan Kuliah*: Pengguna dapat mengakses catatan kuliah yang relevan dengan mata kuliah yang dipilih.
     """)
     
     st.header("Tim Pengembang")
     st.write("""
         Aplikasi ini dikembangkan oleh:
-        - **Zulfikar Syahid.**
-        - **Rizmi Maitri Nurgianti.**
-        - **Nafisah Nailalhusna Isbandi.**
-        - **Jane Lazarina Bora Isu.**
+        - *Jane Lazarina Bora Isu.*
+            NIM: 2460394
+        - *Nafisah Nailalhusna Isbandi.*
+            NIM : 2460453
+        - *Rizmi Maitri Nurgianti.*
+            NIM : 2460504
+        - *Zulfikar Syahid.*
+            NIM : 2460549
     """)
     
     st.header("Kontak")

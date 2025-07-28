@@ -371,23 +371,17 @@ elif menu == "Responsi IPC":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
                             # Tampilkan video di aplikasi Streamlit
-                            # Video Part 1
-                            st.subheader("Video Part 1")
-                            components.html(
-                                '''
-                                <iframe src="https://drive.google.com/file/d/1pg7TRHY-Q-BXBE4so7sC1MGISDsqva-Y/preview" width="800" height="480" allow="autoplay"></iframe>
-                                ''',
-                                height=500
-                            )
-                            
-                            # Video Part 2
-                            st.subheader("Video Part 2")
-                            components.html(
-                                '''
-                                <iframe src="https://drive.google.com/file/d/1upl1tdaTf7vvnrwo2TR7C65xT6t2b_k0/preview" width="800" height="480" allow="autoplay"></iframe>
-                                ''',
-                                height=500
-                            )
+                            # Buat list ID video
+                                video_ids = [
+                                    ("Video Part 1", "1pg7TRHY-Q-BXBE4so7sC1MGISDsqva-Y"),
+                                    ("Video Part 2", "1upl1tdaTf7vvnrwo2TR7C65xT6t2b_k0")
+                                ]
+                                for title, drive_id in video_ids:
+                                    st.subheader(title)
+                                    embed_code = f'''
+                                    <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                                    '''
+                                    components.html(embed_code, height=500)
 
                         elif st.session_state.selected_pertemuan_responsi == 2:
                             st.write("coming soon")

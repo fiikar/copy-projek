@@ -369,7 +369,19 @@ elif menu == "Responsi IPC":
                 if st.session_state.selected_prodi_responsi == "ANKIM":
                     if st.session_state.selected_matkul_responsi == "UTS BLOK 2 SEMESTER 2":
                         if st.session_state.selected_pertemuan_responsi == 1:
-                            st.video("https://drive.usercontent.google.com/download?id=13tNnytoo7KNzbNQ-L6LkMhR1uPXxk_nn&export=download&authuser=0")
+                            import streamlit.components.v1 as components
+                            
+                            # ID video Google Drive kamu
+                            drive_id = "1Zm_xnQIu6GqTvnJUBYg8VB1lkwpRWNES"
+                            
+                            # Embed HTML video dari Google Drive
+                            embed_code = f'''
+                            <iframe src="https://drive.google.com/file/d/{drive_id}/preview" width="800" height="480" allow="autoplay"></iframe>
+                            '''
+                            
+                            # Tampilkan di Streamlit
+                            components.html(embed_code, height=500)
+
                         elif st.session_state.selected_pertemuan_responsi == 2:
                             st.write("coming soon")
                     elif st.session_state.selected_matkul_responsi == "UAS BLOK 2 SEMESTER 2":
